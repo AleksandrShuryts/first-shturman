@@ -1,0 +1,67 @@
+
+/* Дано два массива. Найти наименьшее среди тех элементов первого массива, 
+ * которые не входят во второй массив.
+ */
+
+package array;
+
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
+
+
+public class Mas_8 {
+
+	public static void main(String[] args) {
+		int n, m;
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Введите длину массива A: ");
+		n = scanner.nextInt();
+		int[] masA = new int[n];
+		System.out.print("Введите длину массива B: ");
+		m = scanner.nextInt();
+		int[] masB = new int[m];
+		// Заполнение массива случайными числами
+		System.out.println("Массив A равен: ");
+		for (int i = 0; i < masA.length; i++) {
+			masA[i] = ThreadLocalRandom.current().nextInt(0, 10);
+			System.out.print(masA[i] + " ");
+		}
+		System.out.println();
+		System.out.println("Массив B равен: ");
+		for (int i = 0; i < masB.length; i++) {
+			masB[i] = ThreadLocalRandom.current().nextInt(0, 10);
+			System.out.print(masB[i] + " ");
+		}
+		//Сортировка массива А
+		System.out.println();
+		System.out.println("Отсортированный массив А равен: ");
+		Arrays.sort(masA);
+		for (int i : masA) {
+			System.out.print(i + " ");
+		}
+		int k = 0;
+		poisk:
+			for (int i = 0; i < masA.length; i++) {
+				for (int j = 0; j < masB.length; j++) {
+					if(masA[i] == masB[j]) {
+						k++;
+						if (k == masA.length) {
+							System.out.println();
+							System.out.println("Все числа массива A содержаться в массиве B");	
+						}
+						continue poisk;
+					}
+
+				}
+				
+				System.out.println();
+				System.out.println("Наименьшей элемент массива А не входящий в массив B равен: " + masA[i]);
+				break;
+
+			}
+		
+		scanner.close();
+	}
+
+}
